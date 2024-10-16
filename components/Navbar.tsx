@@ -6,8 +6,11 @@ import Logo from "../assets/Logo.png";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders, LiteralUnion, ClientSafeProvider } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers/index";
-const isUserLoggedIn= true;
-const [providers, setProviders]=  useState(null);;
+
+
+const Navbar = () => {
+  const isUserLoggedIn= true;
+  const [providers, setProviders]=  useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
 useEffect(() => {
     const fetchProviders = async ()=>{
         const response = await getProviders();
@@ -17,8 +20,6 @@ useEffect(() => {
 
 
 },[])
-
-const Navbar = () => {
     return (
         <div  className="bg-[#99abc5]">
       <nav className="flex flex-row gap-5 items-center justify-between  ">
