@@ -11,6 +11,7 @@ import { BuiltInProviderType } from "next-auth/providers/index";
 const Navbar = () => {
   const isUserLoggedIn= true;
   const [providers, setProviders]=  useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
+  const[toggleDropdown, setToggleDropdown] =useState(false)
 useEffect(() => {
     const fetchProviders = async ()=>{
         const response = await getProviders();
@@ -41,8 +42,20 @@ useEffect(() => {
         </div>):
         (
             <>
+            {providers&& Object.values(providers).map((provider)=>(
+              <button
+              type="button"
+              
+              key={provider.name}
+              onClick={()=> signIn(provider.id)}>
+
+                  Sign In
+              </button>
+            ))}
             </>
         )
+   
+
 }
       </nav>
     </div>
